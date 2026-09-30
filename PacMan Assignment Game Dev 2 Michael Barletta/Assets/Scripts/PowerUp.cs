@@ -1,6 +1,8 @@
 
 using UnityEngine;
 
+using PacmanInventory;
+
 public class PowerUp : MonoBehaviour
 {
     private GameObject[] allEnemies;
@@ -25,6 +27,7 @@ public class PowerUp : MonoBehaviour
                 }
             }
             Destroy(gameObject);
+            ItemEvents.RaiseCollected(new PowerUpItem());
         }
     }
 }

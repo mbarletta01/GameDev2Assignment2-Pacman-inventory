@@ -1,20 +1,26 @@
 using UnityEngine;
 
-public class ScorePellet : MonoBehaviour
+namespace PacmanInventory
 {
-    
-   void OnTriggerEnter(Collider other)
+
+
+    public class ScorePellet : MonoBehaviour
     {
-        if (other.CompareTag("Player"))
+
+        void OnTriggerEnter(Collider other)
         {
-            Destroy(gameObject);
-            GameManager.AddScore(10);
-            GameManager.pelletsRemaining--;
-            if (GameManager.pelletsRemaining == 0)
+            if (other.CompareTag("Player"))
             {
-               GameManager.EndGame("You Win!");
+                ItemEvents.RaiseCollected(new ScorePelletItem());
+                Destroy(gameObject);
+                GameManager.AddScore(10);
+                GameManager.pelletsRemaining--;
+                if (GameManager.pelletsRemaining == 0)
+                {
+                    GameManager.EndGame("You Win!");
+                }
             }
         }
-    }           
+    }
 }
 
